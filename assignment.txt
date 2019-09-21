@@ -1,0 +1,17 @@
+Cayuse .NET Coding Test
+Assignment (Required)
+Create a .NET Web API that takes ZIP-code as a parameter, then outputs city name, current temperature, time zone, and general elevation at the location with a user-friendly message. For example, “At the location $CITY_NAME, the temperature is $TEMPERATURE, the timezone is $TIMEZONE, and the elevation is $ELEVATION”. Include documentation with any necessary build instructions and be prepared to discuss your approach.
+
+
+Use the Open WeatherMap https://www.google.com/url?q=https://openweathermap.org/api&sa=D&ust=1568942052741000 current weather API to retrieve the current temperature and city name. You will be required to sign up for a free API key.
+Use the Google Time Zone API https://www.google.com/url?q=https://developers.google.com/maps/documentation/timezone/start?hl%3Den_US&sa=D&ust=1568942052742000 to get the current timezone for a location. You will again need to register a “project” and sign up for a free API key * with Google.
+Use the Google Elevation API https://www.google.com/url?q=https://developers.google.com/maps/documentation/elevation/start&sa=D&ust=1568942052742000 to retrieve elevation data for a location.
+
+* Note that a credit card will soon be required to register for an API key with Google (though the first 40k API calls are still free). If this is a blocker, please contact Nick Seibert for a temporary API key.
+
+
+Full-Stack/Front End - Stretch goal (Optional)
+In addition to the required assignment above, write a modern JS-based SPA front-end that allows a user to input a zipcode, then output the response-message to the page, preferably utilizing the tool you created above.
+
+Assistance and completion
+You’re free to email a ZIP/tar file, use GitHub, Plunker, etc. Questions are welcome, just contact nick.seibert@cayuse.com for any clarifications or to turn in your assignment.

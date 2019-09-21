@@ -1,0 +1,22 @@
+Development environment: 
+Visual Studio Code
+Notepad++ (a little)
+
+APIs:
+https://openweathermap.org/api (weather)
+https://developers.google.com/maps/documentation/timezone/start?hl=en_US (timezone)
+https://developers.google.com/maps/documentation/elevation/start (elevation)
+
+Angular Quickstart:
+Using Angular CLI: ng new zipToInfo
+
+IIS configuration:
+Services:
+Set root to <sourcefolder>\src\ZipToInfo.Services
+Virtual Application Name: ZipToInfo.Services
+
+UI:
+Set root to <sourcefolder>\src\ZipToInfo.UI\zip-to-info\src
+Make sure the URL Rewrite module is intalled: https://www.iis.net/downloads/microsoft/url-rewrite
+Virtual Application Name: ZipToInfo
+
