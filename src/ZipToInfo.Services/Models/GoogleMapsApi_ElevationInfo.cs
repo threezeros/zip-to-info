@@ -1,15 +1,17 @@
+using System.Collections.Generic;
+
 namespace ZipToInfo.Models
 {
     public class GoogleMapsApi_ElevationInfo
     {
-        public GoogleMapsApi_ElevationInfo_Result[] Results { get; set; }
+        public List<GoogleMapsApi_ElevationInfo_Result> Results { get; set; }
         public string Status { get; set; }
     }
 
     public class GoogleMapsApi_ElevationInfo_Result
     {
         public double Elevation { get; set; }
-        public GoogleMapsApi_ElevationInfo_Coordinates location { get; set; }
+        public GoogleMapsApi_ElevationInfo_Coordinates Location { get; set; }
         public double Resolution { get; set; }
     }
 

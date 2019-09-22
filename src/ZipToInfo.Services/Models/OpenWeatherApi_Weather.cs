@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace ZipToInfo.Models
 {
@@ -49,7 +50,7 @@ namespace ZipToInfo.Models
          */
 
         public OpenWeatherApi_Coordinates Coord { get; set; }
-        public OpenWeatherApi_WeatherDetails[] Weather { get; set; }
+        public List<OpenWeatherApi_WeatherDetails> Weather { get; set; }
         public string Base { get; set; }
         public OpenWeatherApi_Main Main { get; set; }
         public int Visibility { get; set; }

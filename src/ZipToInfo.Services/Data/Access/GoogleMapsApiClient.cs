@@ -5,11 +5,11 @@ using ZipToInfo.Shared.Settings;
 
 namespace ZipToInfo.Data.Access
 {
-    public class GoogleMapsApi : IGoogleMapsApi
+    public class GoogleMapsApiClient : WebServiceClient, IGoogleMapsApiClient
     {
         private readonly ISettingsService _settingsService;
 
-        public GoogleMapsApi(ISettingsService settingsService)
+        public GoogleMapsApiClient(ISettingsService settingsService)
         {
             _settingsService = settingsService;
         }
@@ -19,16 +19,12 @@ namespace ZipToInfo.Data.Access
             // TODO: RestSharp provides much better support for creating Rest requests. 
             //      This should be sufficient for this exercise, but future enhancements could consider using these enhancements.
             //      In addition, we know that we will have multiple requests to the same root, and it's
-            //      appropriate to keep the "client" around, modifying the remaining 
+            //      appropriate to keep the "client" around, modifying the remaining bits of the rest call itself...
             var client = new RestClient(GoogleElevationUrl(latitude, longitude));
             var request = new RestRequest();
             var response = client.Get<GoogleMapsApi_ElevationInfo>(request);
             
-            if (response.ErrorException != null)
-            {
-                // TODO: log and report error
-                throw new Exception("Error getting weather information", response.ErrorException);
-            }
+            AssertHttpResponse(response);
             return response.Data;
         }
 
@@ -39,11 +35,7 @@ namespace ZipToInfo.Data.Access
             var request = new RestRequest();
             var response = client.Get<GoogleMapsApi_TimeZoneInfo>(request);
             
-            if (response.ErrorException != null)
-            {
-                // TODO: log and report error
-                throw new Exception("Error getting weather information", response.ErrorException);
-            }
+            AssertHttpResponse(response);
             return response.Data;
         }
 

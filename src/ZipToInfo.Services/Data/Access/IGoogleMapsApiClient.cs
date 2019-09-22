@@ -2,7 +2,7 @@ using ZipToInfo.Models;
 
 namespace ZipToInfo.Data.Access
 {
-    public interface IGoogleMapsApi
+    public interface IGoogleMapsApiClient
     {
         GoogleMapsApi_ElevationInfo GetElevationInfo(double latitude, double longitude);
         

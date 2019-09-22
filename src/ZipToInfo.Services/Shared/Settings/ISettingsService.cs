@@ -7,6 +7,7 @@ namespace ZipToInfo.Shared.Settings
         string GoogleMapsApi_Elevation_Api_Url { get; }
         string GoogleMapsApi_Key { get; }
         string GoogleMapsApi_TimeZone_Api_Url { get; }
-        string OpenWeatherApi_Weather_Api_Url { get; }
+        string OpenWeatherApi_CurrentWeather_Api_Url { get; }
+        string OpenWeatherApi_AppId { get; }
     }
 }

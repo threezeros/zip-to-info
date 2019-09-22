@@ -1,29 +1,26 @@
-using System;
-using System.Configuration;
+using Microsoft.Extensions.Configuration;
 
 namespace ZipToInfo.Shared.Settings 
 {
     public class SettingsService : ISettingsService
     {
-        // going to go ahead an hardcode these, as they are the only settings for this exercise, 
-        // but this class does support config settings if I want to add these later
-        public string GoogleMapsApi_Elevation_Api_Url => $"https://maps.googleapis.com/maps/api/elevation/json?locations={0},{1}&key={2}";
-        public string GoogleMapsApi_Key => "TBD";
-        public string GoogleMapsApi_TimeZone_Api_Url => $"https://maps.googleapis.com/maps/api/timezone/json?location={0},{1}&timestamp={2}&key={3}";
-        public string OpenWeatherApi_Weather_Api_Url => "http://api.openweathermap.org/data/2.5/weather?zip={0},us";
+        private readonly IConfiguration _configuration;
 
-        
-
-        public string OpenWeatherUrl(int zip)
+        public SettingsService(IConfiguration configuration)
         {
-            return string.Format(OpenWeatherApi_Weather_Api_Url, zip.ToString());
+            _configuration = configuration;
         }
 
-        // Just in case I want to add config entries...
-        private string GetSetting(string key)
+        public string GoogleMapsApi_Elevation_Api_Url => GetSetting<string>("GoogleMapsApi_Elevation_Api_Url");
+        public string GoogleMapsApi_Key => GetSetting<string>("GoogleMapsApi_Key");
+        public string GoogleMapsApi_TimeZone_Api_Url => GetSetting<string>("GoogleMapsApi_TimeZone_Api_Url");
+        public string OpenWeatherApi_AppId => GetSetting<string>("OpenWeatherApi_AppId");
+        public string OpenWeatherApi_CurrentWeather_Api_Url => GetSetting<string>("OpenWeatherApi_CurrentWeather_Api_Url");
+        
+        // at some point, application level caching might be a good idea?
+        private T GetSetting<T>(string key)
         {
-            var setting = ConfigurationManager.AppSettings[key];
-            return setting;
+            return _configuration.GetValue<T>(key);
         }
     }
 }

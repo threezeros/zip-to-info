@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ZipToInfo.Services.Controllers
 {
+    // boilerplate web api controller
     [Route("api/[controller]")]
     public class ValuesController : Controller
     {

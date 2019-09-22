@@ -8,6 +8,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using ZipToInfo.Data;
+using ZipToInfo.Data.Access;
+using ZipToInfo.Models;
+using ZipToInfo.Shared.Settings;
 
 namespace ZipToInfo.Services
 {
@@ -24,6 +28,12 @@ namespace ZipToInfo.Services
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddSingleton<IConfiguration>(Configuration);
+
+            services.AddScoped<ISettingsService, SettingsService>();
+            services.AddScoped<IOpenWeatherApiClient, OpenWeatherApiClient>();
+            services.AddScoped<IGoogleMapsApiClient, GoogleMapsApiClient>();
+            services.AddScoped<IDataService, DataService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
