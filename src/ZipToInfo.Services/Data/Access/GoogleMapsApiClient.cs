@@ -23,8 +23,10 @@ namespace ZipToInfo.Data.Access
             var client = new RestClient(GoogleElevationUrl(latitude, longitude));
             var request = new RestRequest();
             var response = client.Get<GoogleMapsApi_ElevationInfo>(request);
-            
+
             AssertHttpResponse(response);
+            AssertGoogleMapsResponse(response.Data);
+            
             return response.Data;
         }
 
@@ -36,7 +38,21 @@ namespace ZipToInfo.Data.Access
             var response = client.Get<GoogleMapsApi_TimeZoneInfo>(request);
             
             AssertHttpResponse(response);
+            AssertGoogleMapsResponse(response.Data);
+        
             return response.Data;
+        }
+
+        private void AssertGoogleMapsResponse(IGoogleMapsResponse data)
+        {
+            if (data.Status == "OK") return;
+            
+            if (data.Status == "REQUEST_DENIED")
+            {
+                throw new Exception("Looks like we got a bad Google Maps API key.");
+            }
+
+            throw new Exception($"Something happened. Status from Google Maps call was expected \"OK\" but was \"{data.Status}\"");
         }
 
         private string GoogleElevationUrl(double latitude, double longitude)
@@ -46,7 +62,7 @@ namespace ZipToInfo.Data.Access
 
         private string GoogleTimeZoneUrl(double latitude, double longitude, DateTime timestamp)
         {
-            return string.Format(_settingsService.GoogleMapsApi_TimeZone_Api_Url, latitude.ToString(), longitude.ToString(), timestamp.Ticks.ToString(), _settingsService.GoogleMapsApi_Key);
+            return string.Format(_settingsService.GoogleMapsApi_TimeZone_Api_Url, latitude.ToString(), longitude.ToString(), new DateTimeOffset(timestamp).ToUnixTimeSeconds().ToString(), _settingsService.GoogleMapsApi_Key);
         }
     }
 }

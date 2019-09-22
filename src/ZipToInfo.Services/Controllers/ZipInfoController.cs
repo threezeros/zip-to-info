@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.AspNetCore.Mvc;
 using ZipToInfo.Data;
-using ZipToInfo.Data.Access;
 using ZipToInfo.Models;
-using ZipToInfo.Shared.Settings;
 
 namespace ZipToInfo.Services.Controllers
 {

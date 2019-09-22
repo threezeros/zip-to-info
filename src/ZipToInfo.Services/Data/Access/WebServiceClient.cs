@@ -9,7 +9,7 @@ namespace ZipToInfo.Data.Access
         {
             if (response.IsSuccessful) return; // no HTTP errors reported, so skip the remainder of the checks
 
-            // TODO: throw the appropriate exception type... right now, I'm keeping to the base exception class for simplicity here
+            // TODO: throw the appropriate exception type... right now, I'm keeping to the basic system.exception class for simplicity
 
             // check status codes
             if (response.StatusCode != System.Net.HttpStatusCode.OK)
@@ -26,6 +26,8 @@ namespace ZipToInfo.Data.Access
             {
                 throw new Exception($"RestSharp error getting information {response.ErrorMessage}", response.ErrorException);
             }
+
+            throw new Exception($"Something happened. Check deserialized properties for more information: {response.ToString()}");
         }
     }
 }

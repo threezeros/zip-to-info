@@ -1,6 +1,6 @@
 namespace ZipToInfo.Models
 {
-    public class GoogleMapsApi_TimeZoneInfo
+    public class GoogleMapsApi_TimeZoneInfo : IGoogleMapsResponse
     {
         /*
         sample response JSON according to: https://developers.google.com/maps/documentation/timezone/start?hl=en_US

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace ZipToInfo.Models
 {
-    public class GoogleMapsApi_ElevationInfo
+    public class GoogleMapsApi_ElevationInfo : IGoogleMapsResponse
     {
         public List<GoogleMapsApi_ElevationInfo_Result> Results { get; set; }
         public string Status { get; set; }
@@ -10,7 +10,7 @@ namespace ZipToInfo.Models
 
     public class GoogleMapsApi_ElevationInfo_Result
     {
-        public double Elevation { get; set; }
+        public double? Elevation { get; set; }
         public GoogleMapsApi_ElevationInfo_Coordinates Location { get; set; }
         public double Resolution { get; set; }
     }

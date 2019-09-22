@@ -27,8 +27,8 @@ namespace ZipToInfo.Data
             var zipInfo = new ZipInfo {
                 CityName = weather.Name,
                 CurrentTemperatureFahrenheit = weather.Main.Temp,
-                ElevationInFeet = elevation.Results.FirstOrDefault()?.Elevation ?? 0,
-                TimeZone = timezone.TimeZoneName != null ? TimeZoneInfo.FromSerializedString(timezone.TimeZoneName) : TimeZoneInfo.Local,
+                ElevationInFeet = elevation.Results.FirstOrDefault()?.Elevation,
+                TimeZone = timezone.TimeZoneName,
                 ZipCode = zipCode
             };
             
