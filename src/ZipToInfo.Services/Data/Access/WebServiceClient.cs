@@ -3,7 +3,7 @@ using RestSharp;
 
 namespace ZipToInfo.Data.Access
 {
-    public class WebServiceClient
+    public abstract class WebServiceClient
     {
         protected void AssertHttpResponse(IRestResponse response)
         {

@@ -6,7 +6,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace ZipToInfo.Services.Tests
 {
-    public class SettingsTests
+    public class SettingsService_Tests
     {
         private SettingsService _settingsService;
 
