@@ -7,16 +7,33 @@ https://openweathermap.org/api (weather)
 https://developers.google.com/maps/documentation/timezone/start?hl=en_US (timezone)
 https://developers.google.com/maps/documentation/elevation/start (elevation)
 
+third party libs and frameworks:
+Angular
+.NET Core Web Api
+RestSharp
+
+
+
 Angular Quickstart:
 Using Angular CLI: ng new zipToInfo
 
-IIS configuration:
-Services:
-Set root to <sourcefolder>\src\ZipToInfo.Services
-Virtual Application Name: ZipToInfo.Services
-
-UI:
-Set root to <sourcefolder>\src\ZipToInfo.UI\zip-to-info\src
-Make sure the URL Rewrite module is intalled: https://www.iis.net/downloads/microsoft/url-rewrite
-Virtual Application Name: ZipToInfo
+Web Api solution (from folder where you want the solution to be created...):
+dotnet new sln
+-- make new folder called "ZipToInfo.Services" and change to it
+md ZipToInfo.Services
+cd ZipToInfo.Services
+-- create new project in this folder
+dotnet new webapi -o ZipToInfo.Services
+-- go back up a level and add this porject to the sln
+cd ..
+dotnet sln add ./ZipToInfo.Services/ZipToInfo.Services.csproj
+-- make new folder to hold tests and change to it name: "ZipToInfo.Services.Tests"
+md ZipToInfo.Services.Tests
+cd ZipToInfo.Services.Tests
+dotnet new xunit -o ZipToInfo.Services.Tests
+-- add reference to Services project (for testing)
+dotnet add reference ../ZipToUnit.Services/ZipToUnit.Services.csproj
+-- go back up a folder to sln file, add add test project to solution
+cd ..
+dotnet sln add ./ZipToInfo.Services.Tests/ZipToInfo.Services.Tests.csproj
 
