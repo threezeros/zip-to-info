@@ -7,10 +7,12 @@ namespace ZipToInfo.Data.Access
 {
     public class GoogleMapsApiClient : WebServiceClient, IGoogleMapsApiClient
     {
+        private readonly IRestClient _restClient;
         private readonly ISettingsService _settingsService;
 
-        public GoogleMapsApiClient(ISettingsService settingsService)
+        public GoogleMapsApiClient(IRestClient restClient, ISettingsService settingsService)
         {
+            _restClient = restClient;
             _settingsService = settingsService;
         }
 
@@ -20,9 +22,9 @@ namespace ZipToInfo.Data.Access
             //      This should be sufficient for this exercise, but future enhancements could consider using these enhancements.
             //      In addition, we know that we will have multiple requests to the same root, and it's
             //      appropriate to keep the "client" around, modifying the remaining bits of the rest call itself...
-            var client = new RestClient(GoogleElevationUrl(latitude, longitude));
+            _restClient.BaseUrl = new System.Uri(GoogleElevationUrl(latitude, longitude));
             var request = new RestRequest();
-            var response = client.Get<GoogleMapsApi_ElevationInfo>(request);
+            var response = _restClient.Get<GoogleMapsApi_ElevationInfo>(request);
 
             AssertHttpResponse(response);
             AssertGoogleMapsResponse(response.Data);
@@ -33,9 +35,9 @@ namespace ZipToInfo.Data.Access
         public GoogleMapsApi_TimeZoneInfo GetTimeZoneInfo(double latitude, double longitude)
         {
             // TODO: see note above for RestSharp support of Rest calls
-            var client = new RestClient(GoogleTimeZoneUrl(latitude, longitude, DateTime.Now));
+            _restClient.BaseUrl = new System.Uri(GoogleTimeZoneUrl(latitude, longitude, DateTime.Now));
             var request = new RestRequest();
-            var response = client.Get<GoogleMapsApi_TimeZoneInfo>(request);
+            var response = _restClient.Get<GoogleMapsApi_TimeZoneInfo>(request);
             
             AssertHttpResponse(response);
             AssertGoogleMapsResponse(response.Data);
