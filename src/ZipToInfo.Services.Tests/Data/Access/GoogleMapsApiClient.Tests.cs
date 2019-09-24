@@ -27,6 +27,7 @@ namespace ZipToInfo.Services.Tests.Data.Access
             mockSettings.Setup(s => s.GoogleMapsApi_TimeZone_Api_Url).Returns(timeZoneUrl);
 
             var mockClient = new Mock<IRestClient>();
+            mockClient.Setup(cli => cli.Get(It.IsAny<IRestRequest>())).Returns(AccessTestsHelper.GetFakeRestResponse());
             
             _googleClient = new GoogleMapsApiClient(mockClient.Object, mockSettings.Object);
             _googleClient.GetTimeZoneInfo(latitude, longitude);
@@ -49,6 +50,7 @@ namespace ZipToInfo.Services.Tests.Data.Access
             mockSettings.Setup(s => s.GoogleMapsApi_Elevation_Api_Url).Returns(elevationUrl);
 
             var mockClient = new Mock<IRestClient>();
+            mockClient.Setup(cli => cli.Get(It.IsAny<IRestRequest>())).Returns(AccessTestsHelper.GetFakeRestResponse());
             
             _googleClient = new GoogleMapsApiClient(mockClient.Object, mockSettings.Object);
             _googleClient.GetElevationInfo(latitude, longitude);
@@ -83,7 +85,5 @@ namespace ZipToInfo.Services.Tests.Data.Access
         {
             
         }
-
-
     }
 }

@@ -27,7 +27,8 @@ namespace ZipToInfo.Services.Tests.Data.Access
             mockSettings.Setup(s => s.OpenWeatherApi_CurrentWeather_Api_Url).Returns(weatherUrl);
 
             var mockClient = new Mock<IRestClient>();
-            
+            mockClient.Setup(cli => cli.Get(It.IsAny<IRestRequest>())).Returns(AccessTestsHelper.GetFakeRestResponse());
+
             _owClient = new OpenWeatherApiClient(mockClient.Object, mockSettings.Object);
             _owClient.GetWeather(zipCode, countryCode);
 
@@ -46,6 +47,7 @@ namespace ZipToInfo.Services.Tests.Data.Access
             mockSettings.Setup(s => s.OpenWeatherApi_CurrentWeather_Api_Url).Returns(weatherUrl);
 
             var mockClient = new Mock<IRestClient>();
+            mockClient.Setup(cli => cli.Get(It.IsAny<IRestRequest>())).Returns(AccessTestsHelper.GetFakeRestResponse());
             
             _owClient = new OpenWeatherApiClient(mockClient.Object, mockSettings.Object);
             _owClient.GetWeather(zipCode);

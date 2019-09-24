@@ -16,7 +16,7 @@ namespace ZipToInfo.Services.Tests.Models
         {
             var zi = GetDefaultZipInfo();
 
-            var expected = $"At the location {cityName} ({zipCode}), the temperature is {temp} &deg;F, the timezone is {elevation.ToString()}, and the elevation is {elevation.ToString()} ft.";            
+            var expected = $"At the location {cityName} ({zipCode}), the temperature is {temp} &deg;F, the timezone is {timezone}, and the elevation is {elevation.ToString()} ft.";            
 
             Assert.Equal(expected, zi.ToString());
         }
@@ -27,7 +27,7 @@ namespace ZipToInfo.Services.Tests.Models
             var zi = GetDefaultZipInfo();
             zi.ElevationInFeet = null;
             
-            var expected = $"At the location {cityName} ({zipCode}), the temperature is {temp} &deg;F, the timezone is {elevation.ToString()}, and the elevation is [Not Available] ft.";            
+            var expected = $"At the location {cityName} ({zipCode}), the temperature is {temp} &deg;F, the timezone is {timezone}, and the elevation is [Not Available] ft.";            
             Assert.Equal(expected, zi.ToString());
         }
 

@@ -14,7 +14,7 @@ namespace ZipToInfo.Models
         public override string ToString()
         {
             var na = "[Not Available]";
-            return $"At the location {CityName} ({ZipCode}), the temperature is {CurrentTemperatureFahrenheit} &deg;F, the timezone is {TimeZone ?? na}, and the elevation is {ElevationInFeet.ToString() ?? na} ft.";
+            return $"At the location {CityName} ({ZipCode}), the temperature is {CurrentTemperatureFahrenheit} &deg;F, the timezone is {TimeZone ?? na}, and the elevation is {ElevationInFeet?.ToString() ?? na} ft.";
         }
     }
 }

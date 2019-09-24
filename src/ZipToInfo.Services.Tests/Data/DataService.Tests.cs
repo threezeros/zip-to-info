@@ -13,7 +13,7 @@ namespace ZipToInfo.Services.Tests.Data
         [Fact]
         public void DataService_GetInfo_FormatsReturnedObject()
         {
-            var mockGoogleMapsClient = new Mock<GoogleMapsApiClient>();    
+            var mockGoogleMapsClient = new Mock<IGoogleMapsApiClient>();    
             var fakeElevationInfo = new GoogleMapsApi_ElevationInfo 
             {
 
@@ -23,7 +23,7 @@ namespace ZipToInfo.Services.Tests.Data
                 
             };
 
-            var mockOpenWeatherClient = new Mock<OpenWeatherApiClient>();
+            var mockOpenWeatherClient = new Mock<IOpenWeatherApiClient>();
             var fakeWeatherInfo = new GoogleMapsApi_TimeZoneInfo 
             {
                 
