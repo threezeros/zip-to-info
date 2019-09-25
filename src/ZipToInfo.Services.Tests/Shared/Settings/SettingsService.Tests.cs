@@ -1,8 +1,8 @@
-using System;
+using System.Reflection;
 using Xunit;
-using ZipToInfo.Shared.Settings;
-using Moq;
 using Microsoft.Extensions.Configuration;
+using Moq;
+using ZipToInfo.Shared.Settings;
 
 namespace ZipToInfo.Services.Tests
 {
@@ -11,36 +11,27 @@ namespace ZipToInfo.Services.Tests
         private SettingsService _settingsService;
 
         // TODO: this is my first time using XUnit. Nunit has a "setup" attribute use to re-initialize all mocks, etc before a test suite is run.
-        // sure would be nice to have one of those here...
+        // I'm sure XUnit has something similar, but haven't found it yet...
 
-        [Fact]
-        public void Settings_ReturnsGoogleMapsElevationApi()
+        [Theory]
+        [InlineData("GoogleMapsApi_Elevation_Api_Url")]
+        [InlineData("GoogleMapsApi_Key")]
+        public void Settings_ReturnsExpectedStringSetting(string key)
         {
-            var settingKey = "GoogleMapsApi_Elevation_Api_Url";
-            var settingValue = $"{settingKey}_Value";
+            var settingValue = $"{key}_Value";
 
+            // need to mock "GetSection", not "GetValue" because GetValue is an extension method (which are all static), and not Moq-able
+            // unfortuantely, this reveals too much knowledge of the inner workings of an external DLL, and may be fragile as such
+            var mockConfigSection = new Mock<IConfigurationSection>();
+            mockConfigSection.Setup(mcs => mcs.Value).Returns(settingValue);
             var mockConfig = new Mock<IConfiguration>();
-            mockConfig.Setup(mc => mc.GetValue<string>(settingKey)).Returns(settingValue);
+            mockConfig.Setup(mc => mc.GetSection(key)).Returns(mockConfigSection.Object);
 
             _settingsService = new SettingsService(mockConfig.Object);
 
-            Assert.Equal(_settingsService.GoogleMapsApi_Elevation_Api_Url, settingValue);
+            // do some reflection here for flexibility. should only have to define the InlineData when a new setting is added.
+            var propInfo = _settingsService.GetType().GetProperty(key, BindingFlags.Public | BindingFlags.Instance);
+            Assert.Equal(settingValue, propInfo.GetValue(_settingsService));
         }
-
-        [Fact]
-        public void Settings_ReturnsGoogleMapsTimeZoneApi()
-        {
-            var settingKey = "GoogleMapsApi_TimeZone_Api_Url";
-            var settingValue = $"{settingKey}_Value";
-
-            var mockConfig = new Mock<IConfiguration>();
-            mockConfig.Setup(mc => mc.GetValue<string>(settingKey)).Returns(settingValue);
-
-            _settingsService = new SettingsService(mockConfig.Object);
-
-            Assert.Equal(_settingsService.GoogleMapsApi_TimeZone_Api_Url, settingValue);
-        }
-
-        // etc, for remaining settings
     }
 }

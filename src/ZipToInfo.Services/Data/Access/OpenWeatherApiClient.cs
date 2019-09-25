@@ -25,7 +25,7 @@ namespace ZipToInfo.Data.Access
             var response = _restClient.Get<OpenWeatherApi_Weather>(request);
 
             AssertHttpResponse(response);
-            return response.Data;       
+            return response.Data;
         }
 
         private string OpenWeatherUrl(string zipCode, string countryCode)
